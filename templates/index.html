@@ -13,59 +13,118 @@
 body{
 font-family: Arial;
 background: linear-gradient(120deg,#ffdde1,#ee9ca7);
-text-align:center;
-margin-top:80px;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+margin:0;
 overflow:hidden;
+text-align:center;
 }
 
-.caixa{
+/* tela inicial */
 
+#inicio{
+max-width:400px;
+color:#333;
+}
+
+#inicio h2{
+font-weight:normal;
+}
+
+#emoji{
+font-size:60px;
+margin:20px 0;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
+
+}
+
+/* envelope */
+
+#envelope{
+
+width:250px;
+height:160px;
+background:white;
+margin:auto;
+border-radius:8px;
+position:relative;
+cursor:pointer;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+
+}
+
+#flap{
+
+position:absolute;
+top:0;
+left:0;
+width:0;
+height:0;
+border-left:125px solid transparent;
+border-right:125px solid transparent;
+border-top:90px solid #e6e6e6;
+transform-origin:top;
+transition:transform 0.8s;
+
+}
+
+/* convite */
+
+#convite{
+
+display:none;
 background:white;
 padding:40px;
 border-radius:20px;
 width:320px;
-margin:auto;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+animation:aparecer 1s;
 
 }
 
-h1{
-color:#d6336c;
+@keyframes aparecer{
+
+from{
+opacity:0;
+transform:scale(0.7);
 }
 
-input{
-
-padding:10px;
-width:90%;
-border-radius:10px;
-border:1px solid #ccc;
-margin-bottom:20px;
+to{
+opacity:1;
+transform:scale(1);
+}
 
 }
 
 button{
 
-padding:15px 25px;
+padding:14px 25px;
 font-size:16px;
 border:none;
 border-radius:10px;
 cursor:pointer;
+margin:10px;
 
 }
 
 #sim{
-
 background:#28a745;
 color:white;
-
 }
 
 #nao{
-
 background:#dc3545;
 color:white;
 position:absolute;
-
 }
 
 </style>
@@ -74,47 +133,92 @@ position:absolute;
 
 <body>
 
-<div class="caixa">
+<!-- TELA INICIAL -->
+
+<div id="inicio">
+
+<h2>
+Você recebeu um convite para participar desse momento especial em nossas vidas.
+</h2>
+
+<p>
+Clique ou aperte para nos responder!
+</p>
+
+<div id="emoji">🙂</div>
+
+<div id="envelope" onclick="abrirConvite()">
+<div id="flap"></div>
+</div>
+
+</div>
+
+
+<!-- CONVITE -->
+
+<div id="convite">
 
 <h1>💍 Convite Especial 💍</h1>
+
+<p><b>Lucas & Jennyfer</b></p>
 
 <p>Você aceita participar do nosso casamento?</p>
 
 <form action="/confirmar" method="post">
 
-<input type="text" name="nome" placeholder="Digite seu nome" required>
+<input type="text" name="nome" placeholder="Digite seu nome" required
+style="padding:10px;border-radius:8px;border:1px solid #ccc">
 
-<br>
+<br><br>
 
 <button id="sim" type="submit">
 SIM ❤️
+</button>
+
+<button type="button" id="nao">
+NÃO ❌
 </button>
 
 </form>
 
 </div>
 
-<button id="nao">NÃO ❌</button>
-
 <script>
 
-const nao = document.getElementById("nao")
+/* abrir convite */
 
-function fugir(){
+function abrirConvite(){
 
-let largura = window.innerWidth - 120
-let altura = window.innerHeight - 120
+document.getElementById("flap").style.transform="rotateX(180deg)"
 
-let x = Math.random()*largura
-let y = Math.random()*altura
+setTimeout(()=>{
 
-nao.style.left = x + "px"
-nao.style.top = y + "px"
+document.getElementById("inicio").style.display="none"
+document.getElementById("convite").style.display="block"
+
+},700)
 
 }
 
-nao.addEventListener("mouseover", fugir)
-nao.addEventListener("click", fugir)
+/* botão fugir */
+
+const nao=document.getElementById("nao")
+
+function fugir(){
+
+let largura=window.innerWidth-120
+let altura=window.innerHeight-120
+
+let x=Math.random()*largura
+let y=Math.random()*altura
+
+nao.style.left=x+"px"
+nao.style.top=y+"px"
+
+}
+
+nao.addEventListener("mouseover",fugir)
+nao.addEventListener("click",fugir)
 
 </script>
 

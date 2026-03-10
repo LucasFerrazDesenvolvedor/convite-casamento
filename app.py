@@ -60,11 +60,11 @@ def confirmar():
 
 if __name__ == "__main__":
 
-    # abre navegador automaticamente apenas local
-    if os.environ.get("RENDER") is None:
-        webbrowser.open("http://127.0.0.1:5000")
-
     port = int(os.environ.get("PORT", 5000))
+
+    # abre navegador apenas uma vez
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        webbrowser.open(f"http://127.0.0.1:{port}")
 
     app.run(
         host="0.0.0.0",
