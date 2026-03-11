@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmações</title>
+
+<!-- jsPDF CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background: url('https://img.freepik.com/fotos-gratis/fundo-de-flores-de-rosa-3d-com-espaco-de-copia_23-2151028191.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden; /* remove scroll */
+  text-align: center;
+  padding: 0;
+}
+
+.container{
+  background:; /* leve transparência */
+  padding:30px 20px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  max-width:400px;
+  width: 90%;
+  text-align:center;
+  line-height:1.4; /* espaçamento entre linhas */
+  word-wrap: break-word;
+}
+
+h1{
+  margin-bottom:20px;
+  color:#444;
+  line-height:1.2;
+  word-wrap: break-word;
+}
+
+.total{
+  font-size:1.2rem;
+  font-weight:bold;
+  margin-bottom:25px;
+  color:#d6336c;
+  line-height:1.3;
+}
+
+/* BOTÃO PDF */
+#baixarPDF {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #d6336c;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#baixarPDF:hover {
+  background: #a81e4d;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 480px) {
+  .container { padding: 20px; }
+  h1 { font-size: 1.5rem; }
+  .total { font-size: 1rem; }
+  #baixarPDF { font-size: 0.95rem; padding: 10px 16px; }
+}
+
+@media (max-width: 320px) {
+  h1 { font-size: 1.3rem; }
+  .total { font-size: 0.95rem; }
+  #baixarPDF { font-size: 0.9rem; padding: 8px 14px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>💍 Confirmações de Presença 💍</h1>
+  <div class="total">
+    Total de confirmações: {{ convidados|length }}
+  </div>
+
+  <!-- BOTÃO PARA GERAR PDF -->
+  <button id="baixarPDF">📄 Baixar Lista em PDF</button>
+</div>
+
+<script>
+// Lista de convidados do servidor (substitua pelo template real)
+const convidados = [
+  {% for c in convidados %}
+  ["{{ c[0] }}", "{{ c[1] }}"],
+  {% endfor %}
+];
+
+// Função para gerar PDF da lista completa
+document.getElementById('baixarPDF').addEventListener('click', () => {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text("Lista de Presença", 105, 20, null, null, "center");
+
+  doc.setFontSize(12);
+  let y = 30;
+
+  convidados.forEach((c) => {
+    doc.text(`Nome: ${c[0]}   Data: ${c[1]}`, 20, y);
+    y += 10;
+    if(y > 280){ // quebra de página
+      doc.addPage();
+      y = 20;
+    }
+  });
+
+  doc.save("lista_confirmacoes.pdf");
+});
+</script>
+
+</body>
+</html>

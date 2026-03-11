@@ -3,6 +3,8 @@
 
 <head>
 
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +14,9 @@
 
 body{
 font-family: Arial;
-background: linear-gradient(120deg,#ffdde1,#ee9ca7);
+/* Alterado para imagem da web */
+background: url('https://img.freepik.com/fotos-gratis/fundo-de-flores-de-rosa-3d-com-espaco-de-copia_23-2151028191.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center;
+background-size: cover;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -25,45 +29,50 @@ text-align:center;
 /* tela inicial */
 
 #inicio{
-max-width:400px;
-color:#333;
+max-width:420px;
+color:#fff; /* Melhor contraste com a imagem */
+text-shadow: 1px 1px 2px #000;
 }
 
 #inicio h2{
 font-weight:normal;
+min-height:80px;
+transition:opacity 0.5s;
 }
 
-#emoji{
-font-size:60px;
-margin:20px 0;
-animation:pulse 1.5s infinite;
+/* emoji */
+#emoji {
+    font-family: 'Great Vibes', cursive; /* Substituta perfeita da Snell Roundhand */
+    font-size: 65px; /* Aumentado para 65px porque fontes cursivas são mais delicadas */
+    margin: 20px 0;
+    color: #bc6c25; /* Tom terracota */
+    display: block;
+    animation: pulse 1.5s infinite;
+    
+    /* Garante que o texto fique suave e nítido */
+    text-rendering: optimizeLegibility;
 }
 
-@keyframes pulse{
-
-0%{transform:scale(1)}
-50%{transform:scale(1.2)}
-100%{transform:scale(1)}
-
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 /* envelope */
 
 #envelope{
-
 width:250px;
-height:160px;
+height:170px;
 background:white;
 margin:auto;
 border-radius:8px;
 position:relative;
 cursor:pointer;
 box-shadow:0 10px 30px rgba(0,0,0,0.2);
-
 }
 
 #flap{
-
 position:absolute;
 top:0;
 left:0;
@@ -74,46 +83,39 @@ border-right:125px solid transparent;
 border-top:90px solid #e6e6e6;
 transform-origin:top;
 transition:transform 0.8s;
-
 }
 
 /* convite */
 
 #convite{
-
 display:none;
-background:white;
+background:url ('');
 padding:40px;
 border-radius:20px;
-width:320px;
+width:400px;
 box-shadow:0 10px 30px rgba(0,0,0,0.2);
 animation:aparecer 1s;
-
+position:relative;
 }
 
 @keyframes aparecer{
-
 from{
 opacity:0;
 transform:scale(0.7);
 }
-
 to{
 opacity:1;
 transform:scale(1);
 }
-
 }
 
 button{
-
 padding:14px 25px;
 font-size:16px;
 border:none;
 border-radius:10px;
 cursor:pointer;
 margin:10px;
-
 }
 
 #sim{
@@ -127,6 +129,13 @@ color:white;
 position:absolute;
 }
 
+input{
+padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
+width:80%;
+}
+
 </style>
 
 </head>
@@ -137,22 +146,21 @@ position:absolute;
 
 <div id="inicio">
 
-<h2>
-Você recebeu um convite para participar desse momento especial em nossas vidas.
+<h2 id="frase">
+Nossa história ganha um novo capítulo e queremos você lá para escrever conosco.
 </h2>
 
-<p>
-Clique ou aperte para nos responder!
-</p>
-
-<div id="emoji">🙂</div>
+<div id="emoji">Lucas ❤️ Jennyfe</div>
 
 <div id="envelope" onclick="abrirConvite()">
 <div id="flap"></div>
 </div>
 
-</div>
+<p style="margin-top:20px;font-size:14px;color:#fff">
+Clique no envelope para abrir o convite
+</p>
 
+</div>
 
 <!-- CONVITE -->
 
@@ -160,14 +168,44 @@ Clique ou aperte para nos responder!
 
 <h1>💍 Convite Especial 💍</h1>
 
-<p><b>Lucas & Jennyfer</b></p>
+<h2>Lucas & Jennyfe</h2>
 
-<p>Você aceita participar do nosso casamento?</p>
+<p>
+Com grande alegria convidamos você para celebrar
+o nosso casamento.
+</p>
 
-<form action="/confirmar" method="post">
+<hr style="margin:20px 0">
 
-<input type="text" name="nome" placeholder="Digite seu nome" required
-style="padding:10px;border-radius:8px;border:1px solid #ccc">
+<p>
+📅 <b>Data:</b> 15 de Novembro de 2026
+</p>
+
+<p>
+⏰ <b>Horário:</b> 16:00
+</p>
+
+<p>
+📍 <b>Cerimônia:</b><br>
+Igreja Nossa Senhora da Guia<br>
+Guia - Lucena
+</p>
+
+<p>
+🍽 <b>Recepção:</b><br>
+Salão Jardim das Flores<br>
+Logo após a cerimônia
+</p>
+
+<hr style="margin:20px 0">
+
+<p>
+Por favor confirme sua presença:
+</p>
+
+<form action="/confirmar" method="POST">
+
+<input type="text" name="nome" placeholder="Digite seu nome" required>
 
 <br><br>
 
@@ -184,6 +222,37 @@ NÃO ❌
 </div>
 
 <script>
+
+/* frases romanticas */
+
+const frases=[
+
+"Nossa história ganha um novo capítulo e queremos você lá para escrever conosco.",
+
+"O amor é melhor quando compartilhado. Abra para ver o nosso convite!",
+
+"Contagem regressiva para o nosso 'Sim'! Clique no envelope para os detalhes.",
+
+"Prepare o coração (e o traje de festa)! Você foi convidado para o nosso grande dia."
+
+]
+
+let indice=0
+const frase=document.getElementById("frase")
+
+setInterval(()=>{
+
+indice=(indice+1)%frases.length
+frase.style.opacity=0
+
+setTimeout(()=>{
+
+frase.innerText=frases[indice]
+frase.style.opacity=1
+
+},400)
+
+},4000)
 
 /* abrir convite */
 
@@ -206,8 +275,8 @@ const nao=document.getElementById("nao")
 
 function fugir(){
 
-let largura=window.innerWidth-120
-let altura=window.innerHeight-120
+let largura=window.innerWidth-150
+let altura=window.innerHeight-150
 
 let x=Math.random()*largura
 let y=Math.random()*altura

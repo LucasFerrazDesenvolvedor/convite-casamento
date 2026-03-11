@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Casamento</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: url('https://img.freepik.com/fotos-gratis/fundo-de-flores-de-rosa-3d-com-espaco-de-copia_23-2151028191.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* overlay para destacar o painel */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  background: ; /* leve transparência */
+  padding: 40px 25px;
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  width: 320px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centraliza todos os elementos */
+  animation: slideIn 0.8s ease-out forwards;
+}
+
+/* animação de entrada */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+h2 {
+  margin-bottom: 25px;
+  color: #d6336c;
+  font-size: 1.6rem;
+  text-shadow: 1px 1px 3px #fff;
+}
+
+/* INPUTS TRANSPARENTES */
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.7); /* contorno semi-transparente */
+  background: rgba(255, 255, 255, 0.2); /* transparente */
+  margin-bottom: 20px;
+  font-size: 16px;
+  transition: 0.3s;
+  text-align: center; /* centraliza o texto do input */
+  color: #fff; /* cor do texto */
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* placeholder semi-transparente */
+}
+
+input:focus {
+  border-color: #d6336c;
+  box-shadow: 0 0 8px rgba(214,51,108,0.5);
+  outline: none;
+}
+
+/* BOTÃO */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #d6336c;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #b52a5d;
+  transform: scale(1.03);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 30px 15px;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  input, button {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>🔒 Painel Administrativo</h2>
+
+<form method="POST" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+  <input type="password" name="senha" placeholder="Digite a senha" required>
+  <button type="submit">Entrar</button>
+</form>
+
+</div>
+
+</body>
+</html>
