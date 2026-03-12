@@ -96,7 +96,11 @@ def lista():
         with open(ARQUIVO, newline="", encoding="utf-8") as f:
 
             reader = csv.reader(f)
-            next(reader)
+
+            try:
+                next(reader)
+            except StopIteration:
+                pass
 
             for row in reader:
                 convidados.append(row)
