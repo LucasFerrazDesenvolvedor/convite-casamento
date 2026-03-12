@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import csv
 import os
 from datetime import datetime
-import webbrowser
+
 
 app = Flask(__name__)
 
@@ -126,9 +126,6 @@ def logout():
 if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 5000))
-
-    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
-        webbrowser.open(f"http://127.0.0.1:{port}")
 
     app.run(
         host="0.0.0.0",
