@@ -7,6 +7,11 @@
 <title>Confirmado</title>
 
 <style>
+html, body {
+  height: 100%;
+  overflow: hidden; /* trava scroll */
+}
+
 body {
   font-family: Arial, sans-serif;
   background: url('https://img.freepik.com/fotos-gratis/fundo-de-flores-de-rosa-3d-com-espaco-de-copia_23-2151028191.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center;
@@ -14,66 +19,92 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   margin: 0;
-  overflow: hidden;
   text-align: center;
   position: relative;
 }
 
-/* CAIXA TRANSPARENTE */
+/* CAIXA */
 .caixa {
-  background: rgba(255,255,255,0); /* transparente */
-  padding: 30px 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  padding: 25px 20px;
   border-radius: 20px;
   width: 90%;
-  max-width: 400px;
-  margin: auto;
+  max-width: 360px;
   animation: zoomFade 1.2s ease forwards;
 }
 
-/* ANIMAÇÃO DE ENTRADA */
+/* ANIMAÇÃO */
 @keyframes zoomFade {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* TÍTULO */
 h1 {
   color: #d6336c;
-  font-size: 2rem;
-  margin-bottom: 15px;
-  line-height: 1.2;
-  word-wrap: break-word;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
   animation: pulseText 1s infinite alternate;
 }
 
-/* NOME DO CONVIDADO */
 .nome-convidado {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #d6336c;
   animation: pulseText 1s infinite alternate;
 }
 
-/* ANIMAÇÃO PULSANTE */
 @keyframes pulseText {
-  0% { transform: scale(1); text-shadow: 0 0 2px #fff; }
-  50% { transform: scale(1.2); text-shadow: 0 0 10px #fff, 0 0 15px #ff69b4; }
-  100% { transform: scale(1); text-shadow: 0 0 2px #fff; }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
 }
 
 p {
-  font-size: 1rem;
-  margin: 8px 0;
+  font-size: 0.95rem;
+  margin: 6px 0;
   color: #fff;
   text-shadow: 1px 1px 3px #000;
+}
+
+/* QR CODE */
+.qr {
+  margin: 15px 0;
+}
+
+.qr img {
+  width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* PIX BOX */
+.pix-box {
+  background: rgba(255,255,255,0.9);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+/* BOTÃO */
+.btn-copy {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #28a745;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.btn-copy:hover {
+  transform: scale(1.05);
 }
 
 /* CONFETES */
@@ -81,11 +112,9 @@ p {
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: #ff69b4;
   border-radius: 50%;
   top: 0;
   animation: confeteFall linear forwards;
-  opacity: 0.9;
 }
 
 @keyframes confeteFall {
@@ -93,18 +122,6 @@ p {
   100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 480px) {
-  h1 { font-size: 1.5rem; }
-  .nome-convidado { font-size: 1rem; }
-  .caixa { padding: 20px 15px; }
-}
-
-@media (max-width: 320px) {
-  h1 { font-size: 1.3rem; }
-  .nome-convidado { font-size: 0.95rem; }
-  p { font-size: 0.9rem; }
-}
 </style>
 
 </head>
@@ -113,12 +130,55 @@ p {
 
 <div class="caixa">
   <h1>🎉 Presença Confirmada!</h1>
+  
   <p>Obrigado <span class="nome-convidado">{{nome}}</span></p>
   <p>Estamos muito felizes com sua presença ❤️</p>
+
+  <!-- MENSAGEM ELEGANTE -->
+  <p style="margin-top:15px;">
+    Nossa casa já está completa e cheia de carinho 💕,<br>
+    por isso, decidimos não fazer uma lista de presentes tradicional.<br>
+    Se deseja nos presentear, criamos uma caixinha virtual!
+  </p>
+
+  <!-- QR CODE -->
+  <div class="qr">
+    <img src="/static/qrcode.png" alt="QR Code PIX">
+  </div>
+
+  <!-- CHAVE PIX -->
+  <div class="pix-box">
+
+  <b>Chave PIX:</b><br>
+  <span id="chavePix">casamentolucas.jennyfe@outlook.com</span>
+</div>
+
+  <!-- BOTÃO COPIAR -->
+  <button class="btn-copy" onclick="copiarPix()">
+    📋 Copiar chave PIX
+  </button>
+
 </div>
 
 <script>
-// Função para gerar confetes aleatórios
+
+// COPIAR PIX
+function copiarPix(){
+  const chave = document.getElementById("chavePix").innerText;
+
+  navigator.clipboard.writeText(chave).then(() => {
+
+    const msg = document.getElementById("copiadoMsg");
+    msg.style.display = "block";
+
+    setTimeout(() => {
+      msg.style.display = "none";
+    }, 2000);
+
+  });
+}
+
+// CONFETES
 function criarConfete() {
   const confete = document.createElement('div');
   confete.classList.add('confete');
@@ -130,8 +190,8 @@ function criarConfete() {
   setTimeout(() => confete.remove(), 5000);
 }
 
-// Cria vários confetes periodicamente
 setInterval(criarConfete, 150);
+
 </script>
 
 </body>

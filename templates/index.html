@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-br">
 <head>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +13,7 @@
 
 body{
 font-family: Arial;
-/* Alterado para imagem da web */
-background: url('https://img.freepik.com/fotos-gratis/fundo-de-flores-de-rosa-3d-com-espaco-de-copia_23-2151028191.jpg?semt=ais_hybrid&w=740&q=80') no-repeat center center;
+background: url('https://img.freepik.com/fotos-gratis/fundo-de-flores-de-rosa-3d-com-espaco-de-copia_23-2151028191.jpg') no-repeat center center;
 background-size: cover;
 display:flex;
 align-items:center;
@@ -23,53 +21,57 @@ justify-content:center;
 height:100vh;
 margin:0;
 overflow:hidden;
+}
+
+/* TELA INICIAL */
+#inicio{
+max-width:500px;
+color:#fff;
+text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 text-align:center;
 }
 
-/* tela inicial */
-
-#inicio{
-max-width:420px;
-color:#fff; /* Melhor contraste com a imagem */
-text-shadow: 1px 1px 2px #000;
+#frase{
+font-family: Arial, sans-serif; /* FORÇADO PARA ARIAL */
+font-size:23px;
+line-height:1.5;
+min-height:70px;
+transition:0.4s;
+margin-bottom:10px;
 }
 
-#inicio h2{
-font-weight:normal;
-min-height:80px;
-transition:opacity 0.5s;
+#emoji{
+font-family:'Great Vibes', cursive;
+font-size:50px;
+margin:15px 0;
+color:#bc6c25;
+animation:pulse 1.5s infinite;
+text-rendering: optimizeLegibility;
 }
 
-/* emoji */
-#emoji {
-    font-family: 'Great Vibes', cursive; /* Substituta perfeita da Snell Roundhand */
-    font-size: 60px; /* Aumentado para 65px porque fontes cursivas são mais delicadas */
-    margin: 20px 0;
-    color: #bc6c25; /* Tom terracota */
-    display: block;
-    animation: pulse 1.5s infinite;
-    
-    /* Garante que o texto fique suave e nítido */
-    text-rendering: optimizeLegibility;
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-/* envelope */
-
+/* ENVELOPE */
 #envelope{
-width:250px;
-height:170px;
+width:220px;
+height:150px;
 background:white;
 margin:auto;
 border-radius:8px;
 position:relative;
 cursor:pointer;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* TEXTO ABAIXO DO ENVELOPE */
+#inicio p{
+font-family: Arial, sans-serif;
+font-size:14px;
+margin-top:15px;
 }
 
 #flap{
@@ -78,62 +80,100 @@ top:0;
 left:0;
 width:0;
 height:0;
-border-left:125px solid transparent;
-border-right:125px solid transparent;
-border-top:90px solid #e6e6e6;
+border-left:110px solid transparent;
+border-right:110px solid transparent;
+border-top:80px solid #e6e6e6;
 transform-origin:top;
-transition:transform 0.8s;
+transition:0.8s;
 }
 
-/* convite */
-
+/* CARD */
 #convite{
 display:none;
-background:url ('');
-padding:40px;
-border-radius:20px;
-width:400px;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
-animation:aparecer 1s;
-position:relative;
+
+backdrop-filter: blur(8px);
+padding:25px;
+border-radius:18px;
+width:320px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+text-align:center;
+animation:aparecer 0.8s ease;
 }
 
 @keyframes aparecer{
-from{
-opacity:0;
-transform:scale(0.7);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
+from{opacity:0; transform:scale(0.8);}
+to{opacity:1; transform:scale(1);}
 }
 
-button{
-padding:14px 25px;
-font-size:16px;
+/* TEXTOS */
+h1{font-size:20px;}
+h3{
+font-family:'Great Vibes', cursive;
+font-size:32px;
+color:#b5651d;
+margin:10px 0;
+}
+
+p{font-size:14px; margin:5px 0;}
+
+hr{
+margin:15px 0;
 border:none;
-border-radius:10px;
-cursor:pointer;
-margin:10px;
+height:1px;
+background:#ddd;
 }
 
-#sim{
-background:#28a745;
-color:white;
-}
-
-#nao{
-background:#dc3545;
-color:white;
-position:absolute;
-}
-
+/* INPUT */
 input{
 padding:10px;
 border-radius:8px;
 border:1px solid #ccc;
-width:80%;
+width:100%;
+margin-top:10px;
+}
+
+/* BOTÕES */
+.botoes{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:15px;
+}
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+#sim{background:#28a745;color:white;}
+
+#nao{
+background:#dc3545;
+color:white;
+transition:0.25s;
+}
+
+/* POPUP */
+#popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+align-items:center;
+justify-content:center;
+}
+
+#popup-content{
+background:white;
+padding:20px;
+border-radius:12px;
+width:260px;
+text-align:center;
 }
 
 </style>
@@ -142,8 +182,7 @@ width:80%;
 
 <body>
 
-<!-- TELA INICIAL -->
-
+<!-- INICIO -->
 <div id="inicio">
 
 <h2 id="frase">
@@ -156,34 +195,23 @@ Nossa história ganha um novo capítulo e queremos você lá para escrever conos
 <div id="flap"></div>
 </div>
 
-<p style="margin-top:20px;font-size:14px;color:#fff">
-Clique no envelope para abrir o convite
-</p>
+<p style="margin-top:15px;">Clique no envelope 💌</p>
 
 </div>
 
 <!-- CONVITE -->
-
 <div id="convite">
 
 <h1>💍 Convite Especial 💍</h1>
 
-<h2>Lucas & Jennyfe</h2>
+<h3>Lucas & Jennyfe</h3>
 
-<p>
-Com grande alegria convidamos você para celebrar
-o nosso casamento.
-</p>
+<p>Com grande alegria convidamos você para celebrar o nosso casamento.</p>
 
-<hr style="margin:20px 0">
+<hr>
 
-<p>
-📅 <b>Data:</b> 15 de Novembro de 2026
-</p>
-
-<p>
-⏰ <b>Horário:</b> 16:00
-</p>
+<p>📅 <b>30 de Maio de 2026</b></p>
+<p>⏰ <b>15:30</b></p>
 
 <p>
 📍 <b>Cerimônia:</b><br>
@@ -193,38 +221,38 @@ Guia - Lucena
 
 <p>
 🍽 <b>Recepção:</b><br>
-Salão Jardim das Flores<br>
+Camaçari - Lucena<br>
 Logo após a cerimônia
 </p>
 
-<hr style="margin:20px 0">
+<hr>
 
-<p>
-Por favor confirme sua presença:
-</p>
+<p>Confirme sua presença:</p>
 
 <form action="/confirmar" method="POST">
 
 <input type="text" name="nome" placeholder="Digite seu nome" required>
 
-<br><br>
-
-<button id="sim" type="submit">
-SIM ❤️
-</button>
-
-<button type="button" id="nao">
-NÃO ❌
-</button>
+<div class="botoes">
+<button id="sim" type="submit">SIM ❤️</button>
+<button type="button" id="nao">NÃO ❌</button>
+</div>
 
 </form>
 
 </div>
 
+<!-- POPUP -->
+<div id="popup">
+<div id="popup-content">
+<p>😂 Você até tentou, mas não conseguiu fugir!</p>
+<button onclick="fecharPopup()">OK</button>
+</div>
+</div>
+
 <script>
 
-/* frases romanticas */
-
+/* FRASES */
 const frases=[
 
 "Nossa história ganha um novo capítulo e queremos você lá para escrever conosco.",
@@ -237,57 +265,51 @@ const frases=[
 
 ]
 
-let indice=0
-const frase=document.getElementById("frase")
-
+let i=0;
 setInterval(()=>{
-
-indice=(indice+1)%frases.length
-frase.style.opacity=0
-
+i=(i+1)%frases.length;
+const f=document.getElementById("frase");
+f.style.opacity=0;
 setTimeout(()=>{
+f.innerText=frases[i];
+f.style.opacity=1;
+},400);
+},4000);
 
-frase.innerText=frases[indice]
-frase.style.opacity=1
-
-},400)
-
-},4000)
-
-/* abrir convite */
-
+/* ABRIR CONVITE */
 function abrirConvite(){
-
-document.getElementById("flap").style.transform="rotateX(180deg)"
-
+document.getElementById("flap").style.transform="rotateX(180deg)";
 setTimeout(()=>{
-
-document.getElementById("inicio").style.display="none"
-document.getElementById("convite").style.display="block"
-
-},700)
-
+document.getElementById("inicio").style.display="none";
+document.getElementById("convite").style.display="block";
+},700);
 }
 
-/* botão fugir */
+/* BOTÃO NÃO */
+let tentativas=0;
+let travado=false;
 
-const nao=document.getElementById("nao")
+const nao=document.getElementById("nao");
 
-function fugir(){
+nao.addEventListener("click",()=>{
+if(travado) return;
 
-let largura=window.innerWidth-150
-let altura=window.innerHeight-150
+tentativas++;
 
-let x=Math.random()*largura
-let y=Math.random()*altura
-
-nao.style.left=x+"px"
-nao.style.top=y+"px"
-
+if(tentativas<=5){
+let x=Math.random()*200-100;
+let y=Math.random()*100-50;
+nao.style.transform=`translate(${x}px,${y}px)`;
+}else{
+document.getElementById("popup").style.display="flex";
+travado=true;
 }
+});
 
-nao.addEventListener("mouseover",fugir)
-nao.addEventListener("click",fugir)
+function fecharPopup(){
+document.getElementById("popup").style.display="none";
+nao.style.transform="translate(0,0)";
+}
 
 </script>
 
